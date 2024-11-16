@@ -4,16 +4,25 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Products from "../../pages/products/ui/products";
+import { Products } from "../../pages/products";
+import { Layout } from "../layout";
 
 export const AppRouter = () => {
   const routes = createRoutesFromElements(
-    <Route>
-      <Route path="products" element={<Products />} />
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Products />} />
     </Route>
   );
 
-  const router = createHashRouter(routes, {});
+  const router = createHashRouter(routes, {
+    future: {
+      v7_relativeSplatPath: true,
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  });
 
   return (
     <div>
