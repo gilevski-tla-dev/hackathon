@@ -2,6 +2,7 @@ export interface IProduct {
   name: string;
   avatar: string;
   description: string;
+  author: string;
   id: string;
 }
 

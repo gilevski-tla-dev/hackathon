@@ -1,20 +1,22 @@
 import {
-  createHashRouter,
+  createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Products } from "../../pages/products";
 import { Layout } from "../layout";
+import { ProductsPage } from "../../pages/ProductsPage";
+import { ProductDetailPage } from "../../pages/ProductDetailPage";
 
 export const AppRouter = () => {
   const routes = createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={<Products />} />
+      <Route path="/products" element={<ProductsPage />} />
+      <Route path="products/:id" element={<ProductDetailPage />} />
     </Route>
   );
 
-  const router = createHashRouter(routes, {
+  const router = createBrowserRouter(routes, {
     future: {
       v7_relativeSplatPath: true,
       v7_fetcherPersist: true,
