@@ -8,13 +8,13 @@ import { IProduct } from "../../../shared/api/products/types";
 
 const ProductSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
-  avatar: Yup.string().url("Invalid URL").required("Required"),
+  avatar: Yup.string().url("невалидный URL").required("Required"),
   description: Yup.string().required("Required"),
   author: Yup.string().required("Required"),
 });
 
 export const ProductsPage: React.FC = () => {
-  const { data, isLoading, error } = useQuery<IProduct[]>({
+  const { data, isLoading, error, refetch } = useQuery<IProduct[]>({
     queryKey: ["products"],
     queryFn: getProducts,
   });
@@ -28,6 +28,7 @@ export const ProductsPage: React.FC = () => {
     mutationFn: createProduct,
     onSuccess: () => {
       console.log("Product created successfully");
+      refetch();
     },
   });
 
@@ -36,7 +37,7 @@ export const ProductsPage: React.FC = () => {
   }
 
   if (error) {
-    return <div>Error loading products</div>;
+    return <div>Error fetching products</div>;
   }
 
   return (
