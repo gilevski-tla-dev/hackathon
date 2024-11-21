@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -13,7 +13,7 @@ const ProductSchema = Yup.object().shape({
   author: Yup.string().required("Required"),
 });
 
-export const ProductsPage: React.FC = () => {
+export const ProductsPage: FC = () => {
   const { data, isLoading, error, refetch } = useQuery<IProduct[]>({
     queryKey: ["products"],
     queryFn: getProducts,
